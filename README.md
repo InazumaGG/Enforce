@@ -13,11 +13,26 @@ Enforce branding and a source registration point for custom checks.
 
 ## Build
 
-Use JDK 21 and the included Gradle wrapper:
+Run the build script from your checkout (macOS/Linux):
+
+```sh
+./build.sh
+```
+
+It selects JDK 21 from `JAVA_HOME`, macOS's installed JDKs, or Java on `PATH`,
+runs the included Gradle wrapper, and prints the exact finished JAR path. The log
+is saved to `build/enforce-build.log`. Additional Gradle options are supported,
+for example `./build.sh --no-daemon`. Use `./build.sh --help` for usage.
+
+To invoke Gradle directly with JDK 21:
 
 ```sh
 ./gradlew :bukkit:shadowJar -PmavenLocalOverride=false
 ```
+
+If dependency downloads return HTTP 403, run the
+[Enforce Bukkit workflow](https://github.com/InazumaGG/Enforce/actions/workflows/enforce.yml)
+and download its `Enforce-Bukkit` artifact. It runs the same build script.
 
 The Bukkit artifact is written to `bukkit/build/libs/enforce-bukkit-*.jar`.
 It includes PacketEvents by default. Runtime requires Java 17 or newer.
