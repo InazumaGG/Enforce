@@ -32,5 +32,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Enforce-Bukkit
-          path: bukkit/build/libs/enforce-bukkit-*.jar
+          path: bukkit/build/libs/enforce.jar
           if-no-files-found: error

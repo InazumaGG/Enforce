@@ -9,6 +9,7 @@ Builds the Enforce Bukkit plugin using JDK 21 and the Gradle wrapper.
 Uses JAVA_HOME, discovers JDK 21 on macOS, or checks Java on PATH.
 Additional options such as --offline or --no-daemon are passed to Gradle.
 The build log is saved to build/enforce-build.log.
+The plugin JAR is written to bukkit/build/libs/enforce.jar.
 HELP
   exit 0
 fi
@@ -41,16 +42,15 @@ export PATH="$JAVA_HOME/bin:$PATH"
 mkdir -p build
 enforce_log="$enforce_root/build/enforce-build.log"
 printf 'Building Enforce with JDK 21: %s\n' "$JAVA_HOME"
-if ./gradlew :bukkit:shadowJar :printVersion -PmavenLocalOverride=false --console=plain "$@" 2>&1 | tee "$enforce_log"; then
-  enforce_version="$(awk '/^VERSION=/ { value = substr($0, 9) } END { print value }' "$enforce_log")"
+if ./gradlew :bukkit:shadowJar -PmavenLocalOverride=false --console=plain "$@" 2>&1 | tee "$enforce_log"; then
+  enforce_jar="$enforce_root/bukkit/build/libs/enforce.jar"
 else
   enforce_status=$?
   printf '\nBuild failed. Full log: %s\n' "$enforce_log" >&2
   exit "$enforce_status"
 fi
 
-enforce_jar="$enforce_root/bukkit/build/libs/enforce-bukkit-$enforce_version.jar"
-if [[ -z "$enforce_version" || ! -f "$enforce_jar" ]]; then
+if [[ ! -f "$enforce_jar" ]]; then
   printf '\nCould not locate the built JAR. Check %s\n' "$enforce_log" >&2
   exit 1
 fi

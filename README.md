@@ -34,7 +34,8 @@ If dependency downloads return HTTP 403, run the
 [Enforce Bukkit workflow](https://github.com/InazumaGG/Enforce/actions/workflows/enforce.yml)
 and download its `Enforce-Bukkit` artifact. It runs the same build script.
 
-The Bukkit artifact is written to `bukkit/build/libs/enforce-bukkit-*.jar`.
+The Bukkit artifact is written to `bukkit/build/libs/enforce.jar`. Each build uses
+the same filename.
 It includes PacketEvents by default. Runtime requires Java 17 or newer.
 Bukkit-only configuration is the default. To work on the retained Fabric sources,
 use `-Penforce.bukkitOnly=false` with JDK 25 or newer for the Gradle runtime.

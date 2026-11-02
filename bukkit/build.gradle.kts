@@ -274,6 +274,7 @@ tasks {
     }
 
     shadowJar {
+        archiveFileName.set("enforce.jar")
         exclude("META-INF/services/javax.annotation.processing.Processor")
 
         if (!BuildConfig.shadePE) {

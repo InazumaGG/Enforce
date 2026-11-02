@@ -4,7 +4,7 @@ Maintained by InazumaGG. Initial changes: 2026-11-02.
 Based on GrimAnticheat/Grim `2.0` commit
 `dc9f37c2a61d0b1caded41d877af95df4f059c6e` (base version `2.3.75`).
 
-- Bukkit plugin identity `Enforce`, version suffix `enforce.1`, artifact prefix `enforce`.
+- Bukkit plugin identity `Enforce`, version suffix `enforce.1`, artifact filename `enforce.jar`.
 - Native command registration disabled, including `/enforce`, `/grim`, `/grimac` and `/gl`.
 - Branded translated message prefixes, help/click commands and webhook titles.
 - The plugin descriptor identifies the fork and its source.
