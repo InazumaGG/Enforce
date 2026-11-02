@@ -134,6 +134,10 @@ public class PunishmentManager implements ConfigReloadable {
                 final int vl = getViolations(group, check);
                 final int violationCount = group.violations.size();
                 for (ParsedCommand command : group.commands) {
+                    // Core owns notifications and checks ANTICHEAT_ACCESS plus notify.anticheat.
+                    // Retain detection, violation accounting, history and configured sanctions.
+                    if (command.command.equals("[alert]") || command.command.equals("[proxy]")
+                            || command.command.equals("[webhook]")) continue;
                     @Nullable Set<@Nullable PlatformPlayer> verboseListeners = null;
                     // Verbose that prints all flags: /grim verbose subscribers get EVERY flag, not just thresholded
                     // alerts. The verbose string is only rendered (safeGet) when there are listeners, so the flag

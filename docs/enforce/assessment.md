@@ -1,5 +1,11 @@
 # Enforce: check coverage and integration assessment
 
+Implementation update: Inazuma Core now subscribes to flags directly, waiting for Enforce's
+plugin-enable event when Core starts earlier. It uses `ANTICHEAT_ACCESS` and a separate
+`notify.anticheat` preference, controlled by `/alerts [on|off]`. Enforce's native commands
+and alert/proxy/webhook broadcasts are disabled. The integration architecture below
+records the original assessment; the standalone bridge is now implemented inside Core.
+
 Reviewed on 2026-11-02 against Grim's public `2.0` branch at
 [`dc9f37c2a61d0b1caded41d877af95df4f059c6e`](https://github.com/GrimAnticheat/Grim/commit/dc9f37c2a61d0b1caded41d877af95df4f059c6e),
 whose base version is `2.3.75`. The matching public API dependency is `1.6.0.13`;

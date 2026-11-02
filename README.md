@@ -26,9 +26,13 @@ use `-Penforce.bukkitOnly=false` with JDK 25 or newer for the Gradle runtime.
 This fork targets the Inazuma PandaSpigot 1.8.8 environment; inherited support for other
 versions still needs validation with the actual server and plugin configuration.
 
-Use `/enforce help` and `/enforce version`. Existing `grim.*` permissions and `/grim`
-aliases remain available. The Bukkit plugin name and data directory are `Enforce`.
-Update dependent plugins accordingly and run only one anticheat engine instance.
+The Bukkit plugin name and data directory are `Enforce`. Native command registration
+is disabled: `/grim`, `/grimac`, `/gl`, `/enforce` and their namespaced forms are absent.
+Core owns flag delivery through the public API. Recipients require the explicit
+`ANTICHEAT_ACCESS` subrole and the independent `notify.anticheat` preference.
+Core's `/alerts [on|off]` controls that preference. Native alert/proxy/webhook broadcasts
+and login notification toggles are disabled so they cannot bypass Core's access checks.
+Detection, history writes and configured sanctions continue to run.
 
 ## Status
 
@@ -39,8 +43,8 @@ validation remains outstanding. See [validation details](docs/enforce/validation
 
 The initial fork adds branding and extension infrastructure. The 125 registered
 inherited checks include 52 marked experimental; applicability and activation depend
-on protocol and configuration. New autoclicker/aim heuristics and EnforceBridge are
-implementation proposals, not shipped detections. See the assessment before enabling
+on protocol and configuration. New autoclicker/aim heuristics remain implementation
+proposals; the runtime flag integration lives in Inazuma Core. See the assessment before enabling
 experimental checks or choosing automatic sanctions.
 
 ## Upstream updates

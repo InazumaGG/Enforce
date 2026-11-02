@@ -5,9 +5,9 @@ Based on GrimAnticheat/Grim `2.0` commit
 `dc9f37c2a61d0b1caded41d877af95df4f059c6e` (base version `2.3.75`).
 
 - Bukkit plugin identity `Enforce`, version suffix `enforce.1`, artifact prefix `enforce`.
-- Primary `/enforce` command; `/grim` and `/grimac` remain compatibility aliases.
+- Native command registration disabled, including `/enforce`, `/grim`, `/grimac` and `/gl`.
 - Branded translated message prefixes, help/click commands and webhook titles.
-- `/enforce version` identifies the fork and its source.
+- The plugin descriptor identifies the fork and its source.
 - Upstream automatic update-check registration and Bukkit bStats registration removed;
   fork versions are not advertised as upstream releases or counted in Grim's Bukkit metrics.
 - Per-player custom-check registration hook under `gg.inazuma.enforce.checks`.
@@ -28,5 +28,7 @@ Keep schema/flavor markers intact and let the upstream config migration handle s
 older schemas. Stop the server and back up configuration/history before replacing its
 plugin. Run only one of GrimAC and Enforce.
 
-New custom detection heuristics and the Inazuma runtime bridge are proposed in the
-assessment; they are not implemented by the branding/registration changes.
+Core now consumes public API flags and owns all alert recipients: `ANTICHEAT_ACCESS`
+plus the separate `notify.anticheat` preference (`/alerts [on|off]`). Native alert,
+proxy and webhook dispatch and automatic login toggles are disabled. History logging,
+detection and configured sanctions are retained. Custom detection heuristics remain proposals.

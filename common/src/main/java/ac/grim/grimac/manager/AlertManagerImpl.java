@@ -384,7 +384,7 @@ public final class AlertManagerImpl implements AlertManager, ConfigReloadable, S
      * @return listeners this message was sent to, null means console
      */
     public Set<PlatformPlayer> sendVerbose(Component component, @Nullable Set<@Nullable PlatformPlayer> excluding) {
-        return AlertType.VERBOSE.send(component, excluding);
+        return Set.of(); // Core exclusively delivers anticheat observations.
     }
 
     /**
@@ -393,16 +393,16 @@ public final class AlertManagerImpl implements AlertManager, ConfigReloadable, S
      * @return listeners this message was sent to, null means console
      */
     public Set<PlatformPlayer> sendAlert(Component component, @Nullable Set<@Nullable PlatformPlayer> excluding) {
-        return AlertType.NORMAL.send(component, excluding);
+        return Set.of(); // Includes legacy proxy broadcasts, which must not bypass Core's access gate.
     }
 
     @Contract(pure = true)
     public boolean hasVerboseListeners() {
-        return AlertType.VERBOSE.hasListeners();
+        return false;
     }
 
     @Contract(pure = true)
     public boolean hasAlertListeners() {
-        return AlertType.NORMAL.hasListeners();
+        return false;
     }
 }

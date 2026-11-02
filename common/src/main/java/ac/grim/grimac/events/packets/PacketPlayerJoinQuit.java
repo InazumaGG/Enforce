@@ -57,19 +57,8 @@ public class PacketPlayerJoinQuit extends PacketListenerAbstract {
             LogUtil.info("Pipeline: " + ChannelHelper.pipelineHandlerNamesAsString(event.getUser().getChannel()));
         }
 
-        PlayerToggleStore toggles = GrimAPI.INSTANCE.getDataStoreLifecycle().playerToggleStore();
-        applyToggle(platformPlayer, toggles, PlayerToggleStore.KEY_ALERTS,
-                "grim.alerts", "grim.alerts.enable-on-join", "grim.alerts.enable-on-join.silent",
-                (p, silent) -> GrimAPI.INSTANCE.getAlertManager().toggleAlerts(p, silent),
-                (p, value) -> GrimAPI.INSTANCE.getAlertManager().setAlertsEnabled(p, value, true));
-        applyToggle(platformPlayer, toggles, PlayerToggleStore.KEY_VERBOSE,
-                "grim.verbose", "grim.verbose.enable-on-join", "grim.verbose.enable-on-join.silent",
-                (p, silent) -> GrimAPI.INSTANCE.getAlertManager().toggleVerbose(p, silent),
-                (p, value) -> GrimAPI.INSTANCE.getAlertManager().setVerboseEnabled(p, value, true));
-        applyToggle(platformPlayer, toggles, PlayerToggleStore.KEY_BRANDS,
-                "grim.brand", "grim.brand.enable-on-join", "grim.brand.enable-on-join.silent",
-                (p, silent) -> GrimAPI.INSTANCE.getAlertManager().toggleBrands(p, silent),
-                (p, value) -> GrimAPI.INSTANCE.getAlertManager().setBrandsEnabled(p, value, true));
+        // Core owns recipient access and the separate notify.anticheat preference.
+        // Do not restore native notification toggles or enable them through OP permissions.
 
         if (platformPlayer.hasPermission("grim.spectate") && GrimAPI.INSTANCE.getConfigManager().getConfig().getBooleanElse("spectators.hide-regardless", false)) {
             GrimAPI.INSTANCE.getSpectateManager().onLogin(platformPlayer.getUniqueId());
