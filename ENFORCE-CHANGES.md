@@ -16,9 +16,13 @@ Based on GrimAnticheat/Grim `2.0` commit
   `-Penforce.bukkitOnly=false` and JDK 25+.
 - Enforce Bukkit artifact workflow on standard GitHub runners; upstream-specific
   publishing/runner workflows are gated to the upstream repository.
+- WrongBreak compatibility fix for legacy servers: recognize the client's cancel
+  sentinel at decoded Y = -1 for 1.8+ instead of the obsolete unsigned value 4095.
+  See [the diagnosis and reproduction steps](docs/enforce/wrongbreak-legacy.md).
 
-Upstream check implementations, thresholds, public API packages, stable check keys and
-`grim.*` permissions are retained. Existing upstream history and license notices remain.
+Apart from the compatibility fix above, upstream check implementations are retained.
+Thresholds, public API packages, stable check keys and `grim.*` permissions are retained.
+Existing upstream history and license notices remain.
 This initial fork targets Bukkit/PandaSpigot. Fabric sources are retained for merging
 but their loader identity has not been migrated to Enforce.
 
