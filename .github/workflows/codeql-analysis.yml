@@ -18,6 +18,7 @@ on:
 
 jobs:
   analyze:
+    if: github.repository == 'GrimAnticheat/Grim'
     name: Analyze
     runs-on: tenki-standard-autoscale
     permissions:

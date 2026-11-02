@@ -1,0 +1,36 @@
+name: Enforce Bukkit
+
+on:
+  push:
+    branches: [enforce]
+  pull_request:
+    branches: [enforce]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: enforce-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Compile Bukkit artifact
+        run: ./gradlew :bukkit:shadowJar -PmavenLocalOverride=false --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Enforce-Bukkit
+          path: bukkit/build/libs/enforce-bukkit-*.jar
+          if-no-files-found: error

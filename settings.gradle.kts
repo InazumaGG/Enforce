@@ -72,18 +72,21 @@ if (gradle.startParameter.isBuildScan) {
     }
 }
 
-rootProject.name = "grimac"
+rootProject.name = "enforce"
 include("common")
 include("bukkit")
-include("fabric")
-include(":fabric:shared")
-include(":fabric:intermediary")
-include(":fabric:intermediary:mc1161")
-include(":fabric:intermediary:mc1171")
-include(":fabric:intermediary:mc1194")
-include(":fabric:intermediary:mc1205")
-include(":fabric:intermediary:mc12111")
-include(":fabric:official")
-include(":fabric:official:mc261")
+// Enforce targets Bukkit. Avoid configuring Fabric Loom (JDK 25+) for Bukkit builds.
+if (!providers.gradleProperty("enforce.bukkitOnly").map { it.toBoolean() }.getOrElse(true)) {
+    include("fabric")
+    include(":fabric:shared")
+    include(":fabric:intermediary")
+    include(":fabric:intermediary:mc1161")
+    include(":fabric:intermediary:mc1171")
+    include(":fabric:intermediary:mc1194")
+    include(":fabric:intermediary:mc1205")
+    include(":fabric:intermediary:mc12111")
+    include(":fabric:official")
+    include(":fabric:official:mc261")
+}
 
 if (file("workspace.gradle.kts").exists()) apply(from = "workspace.gradle.kts")

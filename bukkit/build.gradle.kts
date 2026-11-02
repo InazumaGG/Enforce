@@ -133,10 +133,10 @@ dependencies {
 }
 
 bukkit {
-    name = "GrimAC"
-    author = "GrimAC"
+    name = "Enforce"
+    authors = listOf("InazumaGG", "GrimAC contributors")
     main = "ac.grim.grimac.platform.bukkit.GrimACBukkitLoaderPlugin"
-    website = "https://grim.ac/"
+    website = "https://github.com/InazumaGG/Enforce"
     apiVersion = "1.13"
     foliaSupported = true
 

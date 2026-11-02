@@ -44,6 +44,7 @@ on:
             - '**.toml'
 jobs:
     call-build-workflow:
+        if: github.repository == 'GrimAnticheat/Grim'
         uses: ./.github/workflows/build-and-publish.yml
         with:
             runner: ${{ github.event.inputs.runner || 'ix' }}

@@ -61,6 +61,7 @@ import com.github.retrooper.packetevents.event.PacketReceiveEvent;
 import com.github.retrooper.packetevents.event.PacketSendEvent;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.ImmutableClassToInstanceMap;
+import gg.inazuma.enforce.checks.EnforceChecks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class CheckManager implements BasicReloadable {
     private final PostPredictionListener[] postPredictionListeners;
 
     public CheckManager(GrimPlayer player) {
-        processors = new ImmutableClassToInstanceMap.Builder<AbstractProcessor>()
+        var builder = new ImmutableClassToInstanceMap.Builder<AbstractProcessor>()
                 .put(CompensatedCameraEntity.class, player.cameraEntity)
                 .put(ChatA.class, new ChatA(player))
                 .put(ChatB.class, new ChatB(player))
@@ -249,8 +250,9 @@ public class CheckManager implements BasicReloadable {
                 .put(InvalidInteractTarget.class, new InvalidInteractTarget(player))
                 .put(TransactionOrder.class, new TransactionOrder(player))
                 .put(VehicleC.class, new VehicleC(player))
-                .put(Hitboxes.class, new Hitboxes(player)) // Hitboxes is invoked by Reach
-                .build();
+                .put(Hitboxes.class, new Hitboxes(player)); // Hitboxes is invoked by Reach
+        EnforceChecks.register(player, builder);
+        processors = builder.build();
 
         ArrayList<AbstractCheck> checks = new ArrayList<>();
         ArrayList<PreViaPacketReceiveListener> preViaPacketReceiveListeners = new ArrayList<>();

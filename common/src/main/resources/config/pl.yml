@@ -18,7 +18,7 @@ alerts:
 verbose:
     print-to-console: false
 
-check-for-updates: true
+check-for-updates: false
 
 client-brand:
     # Oznacza to, że nie będzie transmitować swojej marki operatorom, jeśli marka będzie pasować do następujących wyrażeń regularnych.

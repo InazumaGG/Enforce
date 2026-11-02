@@ -6,6 +6,7 @@ on:
 
 jobs:
     call-release-workflow:
+        if: github.repository == 'GrimAnticheat/Grim'
         uses: ./.github/workflows/build-and-publish.yml
         with:
             runner: 'ix'

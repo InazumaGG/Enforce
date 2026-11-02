@@ -19,7 +19,7 @@ verbose:
     # Mostra dettagli su console?
     print-to-console: false
 
-check-for-updates: true
+check-for-updates: false
 
 client-brand:
     # Ignora i seguenti client nella trasmissione del marchio agli operatori
