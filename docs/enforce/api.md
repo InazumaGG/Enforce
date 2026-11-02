@@ -4,8 +4,8 @@ This guide is pinned to the fork's `ac.grim.grimac:GrimAPI:1.6.0.13` dependency.
 Check the actual deployed Grim/API version before integrating an older build. The wiki's
 `1.3.2.1` example and the API README's `onFlag` examples lag behind this source: the
 current preferred flag callback is `onFlagSupplier`.
-The pinned Maven endpoint returned HTTP 403 during the initial build; see
-[validation.md](validation.md) before treating this as a verified dependency download.
+The pinned Maven endpoint returned HTTP 403 in the local environment, but the hosted
+build resolved it successfully; see [validation.md](validation.md).
 
 ## Dependency and lifecycle
 

@@ -32,9 +32,10 @@ Update dependent plugins accordingly and run only one anticheat engine instance.
 
 ## Status
 
-The initial JAR build is blocked by HTTP 403 responses from upstream dependency
-repositories. Plugin metadata generation passed; Java compilation and live-server
-validation are pending. See [validation details](docs/enforce/validation.md).
+The Bukkit JAR compiled successfully on [GitHub Actions](https://github.com/InazumaGG/Enforce/actions/runs/41488188313).
+The build artifact is available from that run. Local plugin metadata generation also
+passed; the local full build encountered upstream HTTP 403 responses. Live-server
+validation remains outstanding. See [validation details](docs/enforce/validation.md).
 
 The initial fork adds branding and extension infrastructure. The 125 registered
 inherited checks include 52 marked experimental; applicability and activation depend
