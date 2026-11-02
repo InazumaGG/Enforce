@@ -45,6 +45,7 @@ import com.github.retrooper.packetevents.util.Vector3d;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientAttack;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
 import com.viaversion.viaversion.api.Via;
+import gg.inazuma.enforce.compat.DisplayEntityBridge;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.jetbrains.annotations.NotNull;
@@ -94,6 +95,9 @@ public class Reach extends Check implements PacketReceiveListener {
     }
 
     private void onInteract(PacketReceiveEvent event, int entityId, InteractionHand hand) {
+        // Core consumes these UI clicks after decoding; they never attack a world entity.
+        if (DisplayEntityBridge.isDisplayEntity(player.getUniqueId(), entityId)) return;
+
         // Don't let the player teleport to bypass reach
         if (player.getSetbackTeleportUtil().shouldBlockMovement()) {
             event.setCancelled(true);
@@ -227,6 +231,7 @@ public class Reach extends Check implements PacketReceiveListener {
 
     private void tickBetterReachCheckWithAngle() {
         for (Int2ObjectMap.Entry<InteractionData> attack : playerAttackQueue.int2ObjectEntrySet()) {
+            if (DisplayEntityBridge.isDisplayEntity(player.getUniqueId(), attack.getIntKey())) continue;
             PacketEntity reachEntity = player.compensatedEntities.entityMap.get(attack.getIntKey());
             if (reachEntity == null) continue;
 
